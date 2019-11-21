@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.ImageView;
 
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.ReactContext;
@@ -182,6 +183,25 @@ public class RNSearchBarManager extends SimpleViewManager<SearchView> {
         searchView.setIconifiedByDefault(false);
         int padding_start_in_dp = (int) (-16 * reactContext.getResources().getDisplayMetrics().density);
         searchView.setPaddingRelative(padding_start_in_dp, 5, 10, 5);
+
+        processViewRecursive(searchView, view -> {
+            if (view instanceof TextView) {
+                ((TextView) view).setHintTextColor(Color.WHITE);
+            }
+        });
+
+        int searchPlateId = searchView.getContext().getResources().getIdentifier("android:id/search_plate", null, null);
+        View searchPlate = searchView.findViewById(searchPlateId);
+        if (searchPlate!=null) {
+            searchPlate.setBackgroundColor(Color.TRANSPARENT);
+        }
+
+        int searchIconId = searchView.getContext().getResources().getIdentifier("android:id/search_mag_icon", null, null);
+
+        ImageView icon = searchView.findViewById(searchIconId);
+        if (icon!=null) {
+            icon.setColorFilter(Color.WHITE);
+        }
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
