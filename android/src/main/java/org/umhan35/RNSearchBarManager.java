@@ -186,7 +186,7 @@ public class RNSearchBarManager extends SimpleViewManager<SearchView> {
 
         processViewRecursive(searchView, view -> {
             if (view instanceof TextView) {
-                ((TextView) view).setHintTextColor(Color.WHITE);
+                ((TextView) view).setHintTextColor(Color.parseColor("#61ffffff"));
             }
         });
 
@@ -200,7 +200,7 @@ public class RNSearchBarManager extends SimpleViewManager<SearchView> {
 
         ImageView icon = searchView.findViewById(searchIconId);
         if (icon!=null) {
-            icon.setColorFilter(Color.WHITE);
+            icon.setColorFilter(Color.parseColor("#61ffffff"));
         }
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
